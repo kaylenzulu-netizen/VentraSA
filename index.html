@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>VentraSA</title>
+<meta name="description" content="Venture forward.">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/icon-192.png">
+<link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+<meta name="theme-color" content="#0B1F3A">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VentraSA">
+<style>
+
+
+:root{--bg:#FFFFFF;--badge:#0B1F3A;--v:#FFFFFF;--w1:#0B1F3A;--w2:#007A4D;--sl:#007A4D;--gold:#FFB612}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0B1F3A;--badge:#FFFFFF;--v:#0B1F3A;--w1:#FFFFFF;--w2:#22C27C;--sl:#22C27C}}
+:root[data-theme="dark"]{--bg:#0B1F3A;--badge:#FFFFFF;--v:#0B1F3A;--w1:#FFFFFF;--w2:#22C27C;--sl:#22C27C}
+.bg{fill:var(--bg)}.badge{fill:var(--badge)}.vmark{fill:var(--v)}.sun{fill:var(--gold)}
+.halo{fill:none;stroke:var(--gold);stroke-width:4}.rule{fill:var(--gold)}
+.w1{fill:var(--w1)}.w2{fill:var(--w2)}.sl{fill:var(--sl)}
+.ray{stroke:var(--gold);stroke-width:6;stroke-linecap:round;opacity:.9}
+.badge,.halo,.rule{transform-box:fill-box;transform-origin:center}
+.rule{transform-origin:0 50%}
+.play .dawn{animation:dawn 1.6s ease-out 1s both}
+.play .badge{animation:pop .7s cubic-bezier(.2,.9,.25,1.15) both}
+.play .vmark{animation:rise .6s cubic-bezier(.2,.8,.2,1) .55s both}
+.play .sun{animation:sunrise 1.35s cubic-bezier(.16,.84,.24,1) 1s both}
+.play .halo{animation:halo 1.1s ease-out 2.1s both}
+.play .glyph{animation:rise .55s cubic-bezier(.2,.8,.2,1) calc(1.7s + var(--g)*.055s) both}
+.play .rule{animation:rule .6s cubic-bezier(.6,0,.2,1) 2.25s both}
+.play .sglyph{animation:rise .4s ease-out calc(2.4s + var(--g)*.03s) both}
+.play .ray{animation:rayin .5s ease-out calc(2s + var(--i)*.05s) both,chase 1.8s ease-in-out calc(3s + var(--i)*.14s) infinite}
+.exit{animation:exit .45s ease-in both}
+@keyframes dawn{from{opacity:0}to{opacity:1}}
+@keyframes pop{from{opacity:0;transform:scale(.55)}to{opacity:1;transform:scale(1)}}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes sunrise{from{transform:translateY(74px)}to{transform:translateY(0)}}
+@keyframes halo{0%{opacity:0;transform:scale(1)}12%{opacity:.9}100%{opacity:0;transform:scale(2.1)}}
+@keyframes rule{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes rayin{from{opacity:0}to{opacity:.3}}
+@keyframes chase{0%,100%{opacity:.3}35%{opacity:1}}
+@keyframes exit{to{opacity:0;transform:scale(1.05)}}
+@media (prefers-reduced-motion: reduce){.play *{animation:none !important}}
+
+:root{--btn-bg:#0B1F3A;--btn-fg:#FFFFFF;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--btn-bg:#FFFFFF;--btn-fg:#0B1F3A}}
+:root[data-theme="dark"]{--btn-bg:#FFFFFF;--btn-fg:#0B1F3A}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+html,body{height:100%;margin:0;overflow:hidden}
+body{background:var(--bg);font-family:Poppins,'Segoe UI','Helvetica Neue',Arial,sans-serif}
+.stage{height:100%;display:grid;place-items:center}
+#logo{width:min(88vw,560px);height:auto;display:block;overflow:visible}
+.bar{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:center;padding:20px 0 calc(20px + env(safe-area-inset-bottom,0px))}
+button{font:600 15px/1 inherit;font-family:inherit;color:var(--btn-fg);background:var(--btn-bg);border:0;border-radius:999px;padding:12px 26px;cursor:pointer;opacity:.9}
+
+
+.app{display:none;min-height:100%;padding:24px 20px calc(24px + env(safe-area-inset-bottom,0px));box-sizing:border-box}
+.app.show{display:block}
+.app header{display:flex;align-items:center;gap:12px;margin-bottom:28px}
+.app header svg{width:40px;height:40px;flex:0 0 auto}
+.app h1{font-size:20px;margin:0;color:var(--w1)}
+.card{background:color-mix(in srgb, var(--w1) 6%, transparent);border-radius:16px;padding:18px;margin-bottom:14px}
+.card h2{font-size:15px;margin:0 0 6px;color:var(--w1)}
+.card p{font-size:14px;margin:0;color:color-mix(in srgb, var(--w1) 65%, transparent);line-height:1.5}
+
+:root{--btn-bg:#0B1F3A;--btn-fg:#FFFFFF}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--btn-bg:#FFFFFF;--btn-fg:#0B1F3A}}
+:root[data-theme="dark"]{--btn-bg:#FFFFFF;--btn-fg:#0B1F3A}
+.stage{position:fixed;inset:0;transition:opacity .4s ease}
+</style>
+</head>
+<body>
+<main class="stage" id="stage">
+  <div style="height:100%;display:grid;place-items:center">
+    <svg id="logo" class="play" viewBox="0 0 600 460" role="img" aria-label="VentraSA splash animation" style="width:min(88vw,560px);height:auto;overflow:visible">
+    
+    
+    <defs>
+      <radialGradient id="dawnGrad" cx="300" cy="150" r="200" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#FFB612" stop-opacity=".30"/><stop offset="1" stop-color="#FFB612" stop-opacity="0"/>
+      </radialGradient>
+      <clipPath id="sunClip"><polygon points="0,0 600,0 600,105 318,105 300,140 282,105 0,105"/></clipPath>
+    </defs>
+    <circle class="dawn" cx="300" cy="150" r="200" fill="url(#dawnGrad)"/>
+    <g transform="rotate(-100 300 150)"><line class="ray" style="--i:0" x1="300" y1="28" x2="300" y2="8"/></g>
+    <g transform="rotate(-75 300 150)"><line class="ray" style="--i:1" x1="300" y1="28" x2="300" y2="8"/></g>
+    <g transform="rotate(-50 300 150)"><line class="ray" style="--i:2" x1="300" y1="28" x2="300" y2="8"/></g>
+    <g transform="rotate(-25 300 150)"><line class="ray" style="--i:3" x1="300" y1="28" x2="300" y2="8"/></g>
+    <g transform="rotate(0 300 150)"><line class="ray" style="--i:4" x1="300" y1="28" x2="300" y2="8"/></g>
+    <g transform="rotate(25 300 150)"><line class="ray" style="--i:5" x1="300" y1="28" x2="300" y2="8"/></g>
+    <g transform="rotate(50 300 150)"><line class="ray" style="--i:6" x1="300" y1="28" x2="300" y2="8"/></g>
+    <g transform="rotate(75 300 150)"><line class="ray" style="--i:7" x1="300" y1="28" x2="300" y2="8"/></g>
+    <g transform="rotate(100 300 150)"><line class="ray" style="--i:8" x1="300" y1="28" x2="300" y2="8"/></g>
+    <circle class="badge" cx="300" cy="150" r="105"/>
+    <g clip-path="url(#sunClip)">
+      <circle class="halo" cx="300" cy="112" r="34"/>
+      <circle class="sun" cx="300" cy="112" r="34"/>
+    </g>
+    <polygon class="vmark" points="248,105 282,105 300,140 318,105 352,105 300,205"/>
+    <g class="glyph" style="--g:0"><path class="w1" transform="translate(100.00 352) scale(0.08188 -0.09200)" d="M721 702 472 0H258L9 702H191L365 172L540 702Z"/></g>
+    <g class="glyph" style="--g:1"><path class="w1" transform="translate(159.77 352) scale(0.08188 -0.09200)" d="M585 238H198Q202 186 231.5 158.5Q261 131 304 131Q368 131 393 185H575Q561 130 524.5 86.0Q488 42 433.0 17.0Q378 -8 310 -8Q228 -8 164.0 27.0Q100 62 64.0 127.0Q28 192 28 279Q28 366 63.5 431.0Q99 496 163.0 531.0Q227 566 310 566Q391 566 454.0 532.0Q517 498 552.5 435.0Q588 372 588 288Q588 264 585 238ZM413 333Q413 377 383.0 403.0Q353 429 308 429Q265 429 235.5 404.0Q206 379 199 333Z"/></g>
+    <g class="glyph" style="--g:2"><path class="w1" transform="translate(210.21 352) scale(0.08188 -0.09200)" d="M617 326V0H447V303Q447 359 418.0 390.0Q389 421 340 421Q291 421 262.0 390.0Q233 359 233 303V0H62V558H233V484Q259 521 303.0 542.5Q347 564 402 564Q500 564 558.5 500.5Q617 437 617 326Z"/></g>
+    <g class="glyph" style="--g:3"><path class="w1" transform="translate(265.40 352) scale(0.08188 -0.09200)" d="M373 145V0H286Q193 0 141.0 45.5Q89 91 89 194V416H21V558H89V694H260V558H372V416H260V192Q260 167 272.0 156.0Q284 145 312 145Z"/></g>
+    <g class="glyph" style="--g:4"><path class="w1" transform="translate(298.65 352) scale(0.08188 -0.09200)" d="M408 564V383H361Q297 383 265.0 355.5Q233 328 233 259V0H62V558H233V465Q263 511 308.0 537.5Q353 564 408 564Z"/></g>
+    <g class="glyph" style="--g:5"><path class="w1" transform="translate(333.69 352) scale(0.08188 -0.09200)" d="M274 566Q333 566 377.5 542.0Q422 518 446 479V558H617V0H446V79Q421 40 376.5 16.0Q332 -8 273 -8Q205 -8 149.0 27.5Q93 63 60.5 128.5Q28 194 28 280Q28 366 60.5 431.0Q93 496 149.0 531.0Q205 566 274 566ZM324 417Q273 417 237.5 380.5Q202 344 202 280Q202 216 237.5 178.5Q273 141 324 141Q375 141 410.5 178.0Q446 215 446 279Q446 343 410.5 380.0Q375 417 324 417Z"/></g>
+    <g class="glyph" style="--g:6"><path class="w2" transform="translate(389.29 352) scale(0.08188 -0.09200)" d="M42 210H224Q228 171 251.0 150.5Q274 130 311 130Q349 130 371.0 147.5Q393 165 393 196Q393 222 375.5 239.0Q358 256 332.5 267.0Q307 278 260 292Q192 313 149.0 334.0Q106 355 75.0 396.0Q44 437 44 503Q44 601 115.0 656.5Q186 712 300 712Q416 712 487.0 656.5Q558 601 563 502H378Q376 536 353.0 555.5Q330 575 294 575Q263 575 244.0 558.5Q225 542 225 511Q225 477 257.0 458.0Q289 439 357 417Q425 394 467.5 373.0Q510 352 541.0 312.0Q572 272 572 209Q572 149 541.5 100.0Q511 51 453.0 22.0Q395 -7 316 -7Q239 -7 178.0 18.0Q117 43 80.5 92.0Q44 141 42 210Z"/></g>
+    <g class="glyph" style="--g:7"><path class="w2" transform="translate(439.65 352) scale(0.08188 -0.09200)" d="M499 124H237L195 0H16L270 702H468L722 0H541ZM455 256 368 513 282 256Z"/></g>
+    <rect class="rule" x="102" y="372" width="396" height="4" rx="2"/>
+    <g class="sglyph" style="--g:0"><path class="sl" transform="translate(102.00 418) scale(0.02600 -0.02600)" d="M721 702 472 0H258L9 702H191L365 172L540 702Z"/></g>
+    <g class="sglyph" style="--g:1"><path class="sl" transform="translate(125.37 418) scale(0.02600 -0.02600)" d="M233 565V423H462V291H233V137H492V0H62V702H492V565Z"/></g>
+    <g class="sglyph" style="--g:2"><path class="sl" transform="translate(143.83 418) scale(0.02600 -0.02600)" d="M690 0H519L233 433V0H62V702H233L519 267V702H690Z"/></g>
+    <g class="sglyph" style="--g:3"><path class="sl" transform="translate(167.77 418) scale(0.02600 -0.02600)" d="M567 702V565H381V0H210V565H24V702Z"/></g>
+    <g class="sglyph" style="--g:4"><path class="sl" transform="translate(187.53 418) scale(0.02600 -0.02600)" d="M230 702V282Q230 219 261.0 185.0Q292 151 352 151Q412 151 444.0 185.0Q476 219 476 282V702H647V283Q647 189 607.0 124.0Q567 59 499.5 26.0Q432 -7 349 -7Q266 -7 200.5 25.5Q135 58 97.0 123.5Q59 189 59 283V702Z"/></g>
+    <g class="sglyph" style="--g:5"><path class="sl" transform="translate(210.25 418) scale(0.02600 -0.02600)" d="M420 0 274 265H233V0H62V702H349Q432 702 490.5 673.0Q549 644 578.0 593.5Q607 543 607 481Q607 411 567.5 356.0Q528 301 451 278L613 0ZM233 386H339Q386 386 409.5 409.0Q433 432 433 474Q433 514 409.5 537.0Q386 560 339 560H233Z"/></g>
+    <g class="sglyph" style="--g:6"><path class="sl" transform="translate(231.59 418) scale(0.02600 -0.02600)" d="M233 565V423H462V291H233V137H492V0H62V702H492V565Z"/></g>
+    <g class="sglyph" style="--g:8"><path class="sl" transform="translate(259.95 418) scale(0.02600 -0.02600)" d="M519 702V565H233V417H447V284H233V0H62V702Z"/></g>
+    <g class="sglyph" style="--g:9"><path class="sl" transform="translate(278.57 418) scale(0.02600 -0.02600)" d="M33 353Q33 456 81.5 538.0Q130 620 212.5 666.0Q295 712 394 712Q493 712 575.5 666.0Q658 620 705.5 538.0Q753 456 753 353Q753 250 705.0 167.5Q657 85 575.0 39.0Q493 -7 394 -7Q295 -7 212.5 39.0Q130 85 81.5 167.5Q33 250 33 353ZM579 353Q579 446 528.5 501.5Q478 557 394 557Q309 557 258.5 502.0Q208 447 208 353Q208 260 258.5 204.5Q309 149 394 149Q478 149 528.5 205.0Q579 261 579 353Z"/></g>
+    <g class="sglyph" style="--g:10"><path class="sl" transform="translate(303.39 418) scale(0.02600 -0.02600)" d="M420 0 274 265H233V0H62V702H349Q432 702 490.5 673.0Q549 644 578.0 593.5Q607 543 607 481Q607 411 567.5 356.0Q528 301 451 278L613 0ZM233 386H339Q386 386 409.5 409.0Q433 432 433 474Q433 514 409.5 537.0Q386 560 339 560H233Z"/></g>
+    <g class="sglyph" style="--g:11"><path class="sl" transform="translate(324.74 418) scale(0.02600 -0.02600)" d="M1028 702 845 0H638L526 462L410 0H203L25 702H208L309 191L434 702H622L742 191L844 702Z"/></g>
+    <g class="sglyph" style="--g:12"><path class="sl" transform="translate(356.48 418) scale(0.02600 -0.02600)" d="M499 124H237L195 0H16L270 702H468L722 0H541ZM455 256 368 513 282 256Z"/></g>
+    <g class="sglyph" style="--g:13"><path class="sl" transform="translate(380.03 418) scale(0.02600 -0.02600)" d="M420 0 274 265H233V0H62V702H349Q432 702 490.5 673.0Q549 644 578.0 593.5Q607 543 607 481Q607 411 567.5 356.0Q528 301 451 278L613 0ZM233 386H339Q386 386 409.5 409.0Q433 432 433 474Q433 514 409.5 537.0Q386 560 339 560H233Z"/></g>
+    <g class="sglyph" style="--g:14"><path class="sl" transform="translate(401.37 418) scale(0.02600 -0.02600)" d="M693 351Q693 248 647.5 168.0Q602 88 518.5 44.0Q435 0 325 0H62V702H325Q436 702 519.0 658.0Q602 614 647.5 534.5Q693 455 693 351ZM519 351Q519 448 465.0 502.0Q411 556 314 556H233V148H314Q411 148 465.0 201.0Q519 254 519 351Z"/></g>
+    <g class="sglyph" style="--g:15"><path class="sl" transform="translate(424.67 418) scale(0.02600 -0.02600)" d="M40 84Q40 124 68.5 151.0Q97 178 142 178Q186 178 214.5 151.0Q243 124 243 84Q243 45 214.5 18.5Q186 -8 142 -8Q97 -8 68.5 18.5Q40 45 40 84Z"/></g>
+  
+    </svg>
+  </div>
+</main>
+
+<div class="app" id="app">
+  <header>
+    <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="150" cy="150" r="105" fill="var(--badge)"/>
+      <circle cx="150" cy="112" r="34" fill="var(--gold)"/>
+      <polygon points="98,105 132,105 150,140 168,105 202,105 150,205" fill="var(--v)"/>
+    </svg>
+    <h1>VentraSA</h1>
+  </header>
+  <div class="card">
+    <h2>Welcome</h2>
+    <p>This is the app shell. Replace this with your real screens — the splash above has already played and faded out.</p>
+  </div>
+  <div class="card">
+    <h2>Installed as a PWA</h2>
+    <p>Add VentraSA to your home screen from the browser menu to launch it full-screen, offline-ready, with this splash on open.</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+      navigator.serviceWorker.register("./sw.js").catch(function (err) {
+        console.warn("Service worker registration failed:", err);
+      });
+    });
+  }
+
+  var stage = document.getElementById("stage");
+  var app = document.getElementById("app");
+
+  // Swap this timeout for your real "app is ready" signal.
+  var MIN_SPLASH_MS = 2600;
+  var start = Date.now();
+
+  function showApp() {
+    var elapsed = Date.now() - start;
+    var wait = Math.max(0, MIN_SPLASH_MS - elapsed);
+    setTimeout(function () {
+      stage.style.opacity = "0";
+      app.classList.add("show");
+      setTimeout(function () { stage.remove(); }, 450);
+    }, wait);
+  }
+
+  if (document.readyState === "complete") showApp();
+  else window.addEventListener("load", showApp);
+})();
+</script>
+</body>
+</html>
